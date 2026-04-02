@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Force class-based dark mode for the page chrome.
+     Tailwind v4 sometimes resolves `dark:` in base layers via media queries,
+     so we explicitly bind to `html.dark` to match our toggle behavior. */
+  html.dark body {
+    background-color: var(--color-slate-950);
+    color: var(--color-slate-100);
+  }
+
+  /* Tailwind v4 adds `prefers-color-scheme: dark` base styles.
+     To ensure our toggle is the source of truth, explicitly override them. */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--color-slate-50);
+      color: var(--color-slate-900);
+    }
+
+    html.dark body {
+      background-color: var(--color-slate-950);
+      color: var(--color-slate-100);
+    }
+  }
+}
+
+@keyframes coinFloat {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(-18px) rotate(4deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(0) rotate(-2deg);
+    opacity: 0.75;
+  }
+}
+
+.money-coin {
+  animation: coinFloat 7s ease-in-out infinite;
+}
+
+.money-coin--2 {
+  animation-duration: 9.5s;
+}
+
+.money-coin--3 {
+  animation-duration: 11.5s;
+}
+
+.money-coin-glow {
+  filter: drop-shadow(0 10px 22px rgba(99, 102, 241, 0.22));
+}
+
